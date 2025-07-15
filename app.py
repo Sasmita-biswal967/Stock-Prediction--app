@@ -221,7 +221,7 @@ elif page == "Portfolio Optimization":
 elif page== "Stock Price Prediction":
     st.header("Stock Price Prediction with Random Forest")
     ticker = st.text_input("Enter Ticker:","HAL.NS")
-    df = yf.download(ticker, period='10d', interval='30m', auto_adjust=True)
+    df = yf.download(ticker, period='5y', interval='1d', auto_adjust=True)
     df = df[['Open', 'High', 'Low', 'Close', 'Volume']]
     df.dropna(inplace=True)
     df['Target'] = df['Close'].shift(-1)
