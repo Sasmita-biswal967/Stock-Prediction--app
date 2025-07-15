@@ -1,3 +1,7 @@
+### 🌐 Live Demo
+
+👉 [Click here to view the deployed app](https://stock-prediction--app.streamlit.app/)
+
 # 📈 Stock Price Prediction & Portfolio Optimization
 
 This is a Streamlit web app that uses Machine Learning and Modern Portfolio Theory to predict stock returns and optimize your portfolio for maximum performance.
