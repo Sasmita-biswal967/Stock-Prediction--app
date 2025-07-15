@@ -221,14 +221,15 @@ elif page == "Portfolio Optimization":
 elif page== "Stock Price Prediction":
     st.header("Stock Price Prediction with Random Forest")
     ticker = st.text_input("Enter Ticker:","HAL.NS")
-    df = yf.download(ticker, period='10d', interval='30m', auto_adjust=True)[['Open', 'High', 'Low', 'Close', 'Volume']]
+    df = yf.download(ticker, period='10d', interval='30m', auto_adjust=True)
+    df = df[['Open', 'High', 'Low', 'Close', 'Volume']]
     df.dropna(inplace=True)
     df['Target'] = df['Close'].shift(-1)
     df.dropna(inplace=True)
     X = df[['Open', 'High', 'Low', 'Volume']]
     y = df['Target']
-    X_train, X_test, y_train, y_test = train_test_split(X, y, shuffle=False, test_size=0.2)
-    model = RandomForestRegressor(n_estimators=100)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, shuffle=False, test_size=0.2, random_state=42)
+    model = RandomForestRegressor(n_estimators=100, random_state=42)
     model.fit(X_train, y_train)
     y_pred = model.predict(X_test)
 
@@ -238,7 +239,9 @@ elif page== "Stock Price Prediction":
     fig, ax = plt.subplots(figsize=(12, 4))
     ax.plot(y_test.values, label='Actual', color='blue')
     ax.plot(y_pred, label='Predicted', color='red')
-    ax.set_title(f"Intraday Price Prediction for {ticker}")
+    ax.set_title(f"Price Prediction for {ticker}")
+    ax.set_xlabel("Days")
+    ax.set_ylabel("Price")
     ax.legend()
     ax.grid(True)
     st.pyplot(fig)   
